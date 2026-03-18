@@ -64,5 +64,5 @@ lib/
 ## Notes
 
 - Reordering is handled entirely via BLoC; 
-- Drag icons (handles) are shown only in EditWatchlistScreen, as in the reference video.
+- Drag icon (handles) are shown only in EditWatchlistScreen, as in the reference video.
 - The layout uses Expanded, Column, and Row to ensure responsiveness across devices.
