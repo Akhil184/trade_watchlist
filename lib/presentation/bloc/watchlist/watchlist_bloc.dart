@@ -7,6 +7,7 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   WatchlistBloc() : super(const WatchlistState(stocks: [])) {
     on<LoadWatchlist>(_onLoad);
     on<ReorderWatchlist>(_onReorder);
+    on<DeleteStock>(_onDelete);
   }
 
   void _onLoad(LoadWatchlist event, Emitter<WatchlistState> emit) {
@@ -34,5 +35,13 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
     updated.insert(newIndex, item);
 
     emit(state.copyWith(stocks: updated));
+  }
+
+  void _onDelete(DeleteStock event, Emitter<WatchlistState> emit) {
+    final updated = List<Stock>.from(state.stocks);
+    if (event.index >= 0 && event.index < updated.length) {
+      updated.removeAt(event.index);
+      emit(state.copyWith(stocks: updated)); // emit new state to rebuild UI
+    }
   }
 }

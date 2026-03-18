@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../widgets/search_bar.dart';
 import '../../widgets/sort_button.dart';
 import '../../widgets/stock_tile.dart';
@@ -50,9 +49,9 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 Widget _topMarketBar(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-    child: IntrinsicHeight( // 🔥 important for divider height
+    child: IntrinsicHeight( // important for divider height
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center, // 🔥 center align
+        crossAxisAlignment: CrossAxisAlignment.center, // center align
         children: [
           /// LEFT SIDE (SENSEX)
           Expanded(
@@ -93,7 +92,7 @@ Widget _topMarketBar(BuildContext context) {
             ),
           ),
 
-          /// 🔥 DIVIDER
+          ///  DIVIDER
           Container(
             width: 1,
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -108,7 +107,7 @@ Widget _topMarketBar(BuildContext context) {
                 /// NIFTY TEXT
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center, // 🔥 center align
+                  mainAxisAlignment: MainAxisAlignment.center, // center align
                   children: [
                     const Text(
                       "NIFTY BANK",
@@ -158,14 +157,9 @@ Widget _buildWatchlist() {
   return Expanded(
     child: BlocBuilder<WatchlistBloc, WatchlistState>(
       builder: (context, state) {
-        return ReorderableListView.builder(
+        return ListView.builder(
           padding: EdgeInsets.zero,
           itemCount: state.stocks.length,
-          onReorder: (oldIndex, newIndex) {
-            context.read<WatchlistBloc>().add(
-              ReorderWatchlist(oldIndex, newIndex),
-            );
-          },
           itemBuilder: (context, index) {
             final stock = state.stocks[index];
 

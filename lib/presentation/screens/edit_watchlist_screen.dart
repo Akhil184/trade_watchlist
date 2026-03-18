@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../bloc/watchlist/watchlist_bloc.dart';
 import '../bloc/watchlist/watchlist_event.dart';
 import '../bloc/watchlist/watchlist_state.dart';
@@ -25,7 +24,7 @@ class EditWatchlistScreen extends StatelessWidget {
     );
   }
 
-  /// 🔝 TOP BAR
+  /// TOP BAR
   Widget _topBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
@@ -142,7 +141,7 @@ class EditWatchlistScreen extends StatelessWidget {
     );
   }
 
-  /// 🔻 BOTTOM BUTTONS
+  ///  BOTTOM BUTTONS
   Widget _bottomButtons() {
     return Container(
       padding: const EdgeInsets.all(12),

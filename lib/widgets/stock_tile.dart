@@ -20,7 +20,6 @@ class StockTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.drag_handle, color: Colors.grey, size: 20),
 
           const SizedBox(width: 12),
 
