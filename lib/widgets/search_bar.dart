@@ -13,7 +13,7 @@ class SearchBarWidget extends StatelessWidget {
       padding: EdgeInsets.all(screenWidth * 0.03), // responsive padding
       child: Container(
         margin: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.03,
+          horizontal: screenWidth * 0.01,
           vertical: screenHeight * 0.008,
         ),
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.025),

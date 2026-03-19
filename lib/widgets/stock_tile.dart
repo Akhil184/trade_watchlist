@@ -15,9 +15,11 @@ class StockTile extends StatelessWidget {
 
     return Container(
       key: key,
-      padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.03,
-        vertical: screenHeight * 0.018,
+      padding: EdgeInsets.only(
+        left: screenWidth * 0.015,   // 🔽 reduced left space
+        right: screenWidth * 0.03,   // keep right same (or adjust if needed)
+        top: screenHeight * 0.018,
+        bottom: screenHeight * 0.018,
       ),
       decoration: const BoxDecoration(
         border: Border(

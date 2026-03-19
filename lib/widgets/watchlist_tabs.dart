@@ -10,7 +10,18 @@ class WatchlistTabs extends StatelessWidget {
     final textScale = MediaQuery.of(context).textScaleFactor;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+      padding: EdgeInsets.only(
+        left: screenWidth * 0.012,  // 🔽 reduced
+        right: screenWidth * 0.03,
+      ),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Color(0xFFEAEAEA),
+            width: 1,
+          ),
+        ),
+      ),
       child: Row(
         children: [
           _tab("Watchlist 1", true, screenWidth, screenHeight, textScale),

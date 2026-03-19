@@ -42,6 +42,11 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
             SearchBarWidget(),
             WatchlistTabs(),
             SortButton(),
+            Divider(
+              height: 1,          // total space occupied
+              thickness: 1,       // line thickness
+              color: Color(0xFFEAEAEA),
+            ),
             _buildWatchlist()
           ],
         ),
@@ -54,9 +59,10 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 Widget _topMarketBar(
     BuildContext context, double screenWidth, double screenHeight, double textScale) {
   return Padding(
-    padding: EdgeInsets.symmetric(
-      horizontal: screenWidth * 0.03,
-      vertical: screenHeight * 0.015,
+    padding: EdgeInsets.only(
+      left: screenWidth * 0.042,   // only left space
+      top: screenHeight * 0.028,
+      bottom: screenHeight * 0.015,
     ),
     child: IntrinsicHeight(
       child: Row(
@@ -217,6 +223,7 @@ Widget _buildWatchlist() {
 Widget _bottomNav() {
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
+    backgroundColor:Colors.white,
     selectedItemColor: Colors.black,
     unselectedItemColor: Colors.grey,
     items: const [

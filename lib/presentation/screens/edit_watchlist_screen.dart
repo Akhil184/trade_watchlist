@@ -9,17 +9,9 @@ class EditWatchlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    final screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final textScale = MediaQuery
-        .of(context)
-        .textScaleFactor;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -27,7 +19,9 @@ class EditWatchlistScreen extends StatelessWidget {
           children: [
             _topBar(context, screenWidth, screenHeight, textScale),
             _watchlistCard(screenWidth, screenHeight, textScale),
-            Expanded(child: _buildStockList(screenWidth, screenHeight, textScale)),
+            Expanded(
+              child: _buildStockList(screenWidth, screenHeight, textScale),
+            ),
             _bottomButtons(screenWidth, screenHeight, textScale),
           ],
         ),
@@ -36,11 +30,17 @@ class EditWatchlistScreen extends StatelessWidget {
   }
 
   /// TOP BAR
-  Widget _topBar(BuildContext context, double screenWidth, double screenHeight,
-      double textScale) {
+  Widget _topBar(
+    BuildContext context,
+    double screenWidth,
+    double screenHeight,
+    double textScale,
+  ) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,
-        vertical: screenHeight * 0.02,),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.03,
+        vertical: screenHeight * 0.02,
+      ),
       child: Row(
         children: [
           GestureDetector(
@@ -61,14 +61,20 @@ class EditWatchlistScreen extends StatelessWidget {
   }
 
   /// 🟦 WATCHLIST CARD
-  Widget _watchlistCard(double screenWidth, double screenHeight, double textScale) {
+  Widget _watchlistCard(
+    double screenWidth,
+    double screenHeight,
+    double textScale,
+  ) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: screenWidth * 0.03, // responsive horizontal margin
-        vertical: screenHeight * 0.01,),
+        vertical: screenHeight * 0.01,
+      ),
       padding: EdgeInsets.symmetric(
         horizontal: screenWidth * 0.03, // responsive horizontal padding
-        vertical: screenHeight * 0.02,),
+        vertical: screenHeight * 0.02,
+      ),
       decoration: BoxDecoration(
         color: const Color(0xFFF2F2F2),
         borderRadius: BorderRadius.circular(screenWidth * 0.025),
@@ -76,10 +82,7 @@ class EditWatchlistScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "Watchlist 1",
-            style: TextStyle(fontSize: 14 * textScale),
-          ),
+          Text("Watchlist 1", style: TextStyle(fontSize: 14 * textScale)),
           Icon(Icons.edit, size: screenWidth * 0.045),
         ],
       ),
@@ -87,7 +90,11 @@ class EditWatchlistScreen extends StatelessWidget {
   }
 
   /// 📋 LIST (DRAG + DELETE ONLY — NO PRICE)
-  Widget _buildStockList(double screenWidth, double screenHeight, double textScale) {
+  Widget _buildStockList(
+    double screenWidth,
+    double screenHeight,
+    double textScale,
+  ) {
     return BlocBuilder<WatchlistBloc, WatchlistState>(
       builder: (context, state) {
         return ReorderableListView.builder(
@@ -109,15 +116,13 @@ class EditWatchlistScreen extends StatelessWidget {
               key: ValueKey("${stock.name}-$index"),
               padding: EdgeInsets.symmetric(
                 horizontal: screenWidth * 0.03, // responsive horizontal padding
-                vertical: screenHeight * 0.02,),
+                vertical: screenHeight * 0.02,
+              ),
               decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Color(0xFFEAEAEA)),
-                ),
+                border: Border(bottom: BorderSide(color: Color(0xFFEAEAEA))),
               ),
               child: Row(
                 children: [
-
                   /// DRAG ICON
                   ReorderableDragStartListener(
                     index: index,
@@ -146,7 +151,7 @@ class EditWatchlistScreen extends StatelessWidget {
                     onTap: () {
                       context.read<WatchlistBloc>().add(DeleteStock(index));
                     },
-                    child:Icon(
+                    child: Icon(
                       Icons.delete,
                       size: screenWidth * 0.055,
                       color: Colors.black87,
@@ -162,13 +167,15 @@ class EditWatchlistScreen extends StatelessWidget {
   }
 
   ///  BOTTOM BUTTONS
-  Widget _bottomButtons(double screenWidth, double screenHeight,
-      double textScale) {
+  Widget _bottomButtons(
+    double screenWidth,
+    double screenHeight,
+    double textScale,
+  ) {
     return Container(
       padding: EdgeInsets.all(screenWidth * 0.03), // responsive padding
       child: Column(
         children: [
-
           /// OUTLINED BUTTON
           Container(
             width: double.infinity,
@@ -177,7 +184,8 @@ class EditWatchlistScreen extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade400),
               borderRadius: BorderRadius.circular(
-                  screenWidth * 0.03), // responsive radius
+                screenWidth * 0.03,
+              ), // responsive radius
             ),
             child: Center(
               child: Text(
@@ -188,7 +196,6 @@ class EditWatchlistScreen extends StatelessWidget {
           ),
 
           SizedBox(height: screenHeight * 0.015), // responsive spacing
-
           /// PRIMARY BUTTON
           Container(
             width: double.infinity,
@@ -197,7 +204,8 @@ class EditWatchlistScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(
-                  screenWidth * 0.03), // responsive radius
+                screenWidth * 0.03,
+              ), // responsive radius
             ),
             child: Center(
               child: Text(
