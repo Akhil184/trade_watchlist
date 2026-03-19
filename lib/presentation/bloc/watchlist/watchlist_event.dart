@@ -9,7 +9,7 @@ class ReorderWatchlist extends WatchlistEvent {
   ReorderWatchlist(this.oldIndex, this.newIndex);
 }
 
-/// 🗑 ADD THIS
+/// ADD THIS
 class DeleteStock extends WatchlistEvent {
   final int index;
 
