@@ -8,6 +8,7 @@ import '../bloc/watchlist/watchlist_bloc.dart';
 import '../bloc/watchlist/watchlist_event.dart';
 import '../bloc/watchlist/watchlist_state.dart';
 import 'edit_watchlist_screen.dart';
+import '../../core/utils/responsive_utils.dart';
 
 
 class WatchlistScreen extends StatefulWidget {
@@ -29,16 +30,12 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final textScale = MediaQuery.of(context).textScaleFactor;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            _topMarketBar(context,screenWidth, screenHeight, textScale),
+            _topMarketBar(context),
             SearchBarWidget(),
             WatchlistTabs(),
             SortButton(),
@@ -56,19 +53,17 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
   }
 }
 
-Widget _topMarketBar(
-    BuildContext context, double screenWidth, double screenHeight, double textScale) {
+Widget _topMarketBar(BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(
-      left: screenWidth * 0.042,   // only left space
-      top: screenHeight * 0.028,
-      bottom: screenHeight * 0.015,
+      left: ResponsiveUtils.screenWidth * 0.042,
+      top: ResponsiveUtils.screenHeight * 0.028,
+      bottom: ResponsiveUtils.screenHeight * 0.015,
     ),
     child: IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          /// LEFT SIDE (SENSEX)
           Flexible(
             flex: 1,
             child: Column(
@@ -80,40 +75,50 @@ Widget _topMarketBar(
                     Flexible(
                       child: Text(
                         "SENSEX 18TH SEP",
-                        style: TextStyle(fontSize: 12 * textScale),
+                        style: TextStyle(
+                            fontSize: 12 * ResponsiveUtils.textScale),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(width: screenWidth * 0.015),
+                    SizedBox(
+                        width: ResponsiveUtils.screenWidth * 0.015),
                     Flexible(
                       child: Text(
                         "BSE",
                         style: TextStyle(
-                            fontSize: 12 * textScale, color: Colors.grey),
+                          fontSize: 12 * ResponsiveUtils.textScale,
+                          color: Colors.grey,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: screenHeight * 0.015),
+                SizedBox(
+                    height: ResponsiveUtils.screenHeight * 0.015),
                 Row(
                   children: [
                     Flexible(
                       child: Text(
                         "1,225.55",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15 * textScale),
+                          fontWeight: FontWeight.w600,
+                          fontSize:
+                          15 * ResponsiveUtils.textScale,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(width: screenWidth * 0.015),
+                    SizedBox(
+                        width: ResponsiveUtils.screenWidth * 0.015),
                     Flexible(
                       child: Text(
                         "+144.50 (13.3%)",
                         style: TextStyle(
-                            color: Colors.green.shade700,
-                            fontSize: 12 * textScale),
+                          color: Colors.green.shade700,
+                          fontSize:
+                          12 * ResponsiveUtils.textScale,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -123,20 +128,18 @@ Widget _topMarketBar(
             ),
           ),
 
-          /// DIVIDER
           Container(
             width: 1,
-            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+            margin: EdgeInsets.symmetric(
+                horizontal: ResponsiveUtils.screenWidth * 0.03),
             color: Colors.grey.shade300,
           ),
 
-          /// RIGHT SIDE (NIFTY)
           Flexible(
             flex: 1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /// NIFTY TEXT
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,28 +147,37 @@ Widget _topMarketBar(
                     children: [
                       Text(
                         "NIFTY BANK",
-                        style: TextStyle(fontSize: 12 * textScale),
+                        style: TextStyle(
+                            fontSize: 12 * ResponsiveUtils.textScale),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(height: screenHeight * 0.012),
+                      SizedBox(
+                          height:
+                          ResponsiveUtils.screenHeight * 0.012),
                       Row(
                         children: [
                           Flexible(
                             child: Text(
                               "54,172.85",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15 * textScale),
+                                fontWeight: FontWeight.w600,
+                                fontSize:
+                                15 * ResponsiveUtils.textScale,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          SizedBox(width: screenWidth * 0.015),
+                          SizedBox(
+                              width: ResponsiveUtils.screenWidth *
+                                  0.015),
                           Flexible(
                             child: Text(
                               "-14.05 (-0.03%)",
                               style: TextStyle(
-                                  color: Colors.red.shade700,
-                                  fontSize: 12 * textScale),
+                                color: Colors.red.shade700,
+                                fontSize:
+                                12 * ResponsiveUtils.textScale,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -175,19 +187,22 @@ Widget _topMarketBar(
                   ),
                 ),
 
-                /// ARROW
                 SizedBox(
-                  width: screenWidth * 0.08, // fixed width for gesture
+                  width: ResponsiveUtils.screenWidth * 0.08,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const EditWatchlistScreen(),
+                          builder: (_) =>
+                          const EditWatchlistScreen(),
                         ),
                       );
                     },
-                    child: Icon(Icons.chevron_right, size: screenWidth * 0.05),
+                    child: Icon(
+                      Icons.chevron_right,
+                      size: ResponsiveUtils.screenWidth * 0.05,
+                    ),
                   ),
                 ),
               ],

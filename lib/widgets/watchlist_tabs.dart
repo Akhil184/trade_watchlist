@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/responsive_utils.dart';
 
 class WatchlistTabs extends StatelessWidget {
   const WatchlistTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final textScale = MediaQuery.of(context).textScaleFactor;
-
     return Container(
       padding: EdgeInsets.only(
-        left: screenWidth * 0.012,  // 🔽 reduced
-        right: screenWidth * 0.03,
+        left: ResponsiveUtils.screenWidth * 0.012,
+        right: ResponsiveUtils.screenWidth * 0.03,
       ),
       decoration: const BoxDecoration(
         border: Border(
@@ -24,19 +21,21 @@ class WatchlistTabs extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _tab("Watchlist 1", true, screenWidth, screenHeight, textScale),
-          SizedBox(width: screenWidth * 0.06), // responsive spacing
-          _tab("Watchlist 5", false, screenWidth, screenHeight, textScale),
-          SizedBox(width: screenWidth * 0.06),
-          _tab("Watchlist 6", false, screenWidth, screenHeight, textScale),
+          _tab("Watchlist 1", true),
+          SizedBox(width: ResponsiveUtils.screenWidth * 0.06),
+          _tab("Watchlist 5", false),
+          SizedBox(width: ResponsiveUtils.screenWidth * 0.06),
+          _tab("Watchlist 6", false),
         ],
       ),
     );
   }
 
-  Widget _tab(String text, bool active, double screenWidth, double screenHeight, double textScale) {
+  Widget _tab(String text, bool active) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+      padding: EdgeInsets.symmetric(
+        horizontal: ResponsiveUtils.screenWidth * 0.03,
+      ),
       child: Column(
         children: [
           Text(
@@ -44,14 +43,14 @@ class WatchlistTabs extends StatelessWidget {
             style: TextStyle(
               fontWeight: active ? FontWeight.w600 : FontWeight.normal,
               color: active ? Colors.black : Colors.grey,
-              fontSize: 14 * textScale, // responsive text
+              fontSize: 14 * ResponsiveUtils.textScale,
             ),
           ),
-          SizedBox(height: screenHeight * 0.008), // responsive spacing
+          SizedBox(height: ResponsiveUtils.screenHeight * 0.008),
           if (active)
             Container(
-              height: screenHeight * 0.003,   // responsive height
-              width: screenWidth * 0.15,      // responsive width
+              height: ResponsiveUtils.screenHeight * 0.003,
+              width: ResponsiveUtils.screenWidth * 0.15,
               color: Colors.black,
             ),
         ],

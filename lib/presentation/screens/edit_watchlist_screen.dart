@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/utils/responsive_utils.dart';
 import '../bloc/watchlist/watchlist_bloc.dart';
 import '../bloc/watchlist/watchlist_event.dart';
 import '../bloc/watchlist/watchlist_state.dart';
@@ -9,20 +10,17 @@ class EditWatchlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final textScale = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            _topBar(context, screenWidth, screenHeight, textScale),
-            _watchlistCard(screenWidth, screenHeight, textScale),
+            _topBar(context),
+            _watchlistCard(),
             Expanded(
-              child: _buildStockList(screenWidth, screenHeight, textScale),
+              child: _buildStockList(),
             ),
-            _bottomButtons(screenWidth, screenHeight, textScale),
+            _bottomButtons(),
           ],
         ),
       ),
@@ -30,16 +28,11 @@ class EditWatchlistScreen extends StatelessWidget {
   }
 
   /// TOP BAR
-  Widget _topBar(
-    BuildContext context,
-    double screenWidth,
-    double screenHeight,
-    double textScale,
-  ) {
+  Widget _topBar(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.03,
-        vertical: screenHeight * 0.02,
+        horizontal: ResponsiveUtils.screenWidth * 0.03,
+        vertical: ResponsiveUtils.screenHeight * 0.02,
       ),
       child: Row(
         children: [
@@ -47,11 +40,11 @@ class EditWatchlistScreen extends StatelessWidget {
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back),
           ),
-          SizedBox(width: screenWidth * 0.03),
+          SizedBox(width: ResponsiveUtils.screenWidth * 0.03),
           Text(
             "Edit Watchlist 1",
             style: TextStyle(
-              fontSize: 16 * textScale,
+              fontSize: 16 * ResponsiveUtils.textScale,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -60,50 +53,48 @@ class EditWatchlistScreen extends StatelessWidget {
     );
   }
 
-  /// 🟦 WATCHLIST CARD
-  Widget _watchlistCard(
-    double screenWidth,
-    double screenHeight,
-    double textScale,
-  ) {
+  /// WATCHLIST CARD
+  Widget _watchlistCard() {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.03, // responsive horizontal margin
-        vertical: screenHeight * 0.01,
+        horizontal: ResponsiveUtils.screenWidth * 0.03,
+        vertical: ResponsiveUtils.screenHeight * 0.01,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.03, // responsive horizontal padding
-        vertical: screenHeight * 0.02,
+        horizontal: ResponsiveUtils.screenWidth * 0.03,
+        vertical: ResponsiveUtils.screenHeight * 0.02,
       ),
       decoration: BoxDecoration(
         color: const Color(0xFFF2F2F2),
-        borderRadius: BorderRadius.circular(screenWidth * 0.025),
+        borderRadius: BorderRadius.circular(
+          ResponsiveUtils.screenWidth * 0.025,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("Watchlist 1", style: TextStyle(fontSize: 14 * textScale)),
-          Icon(Icons.edit, size: screenWidth * 0.045),
+          Text(
+            "Watchlist 1",
+            style: TextStyle(fontSize: 14 * ResponsiveUtils.textScale),
+          ),
+          Icon(
+            Icons.edit,
+            size: ResponsiveUtils.screenWidth * 0.045,
+          ),
         ],
       ),
     );
   }
 
-  /// 📋 LIST (DRAG + DELETE ONLY — NO PRICE)
-  Widget _buildStockList(
-    double screenWidth,
-    double screenHeight,
-    double textScale,
-  ) {
+  /// LIST
+  Widget _buildStockList() {
     return BlocBuilder<WatchlistBloc, WatchlistState>(
       builder: (context, state) {
         return ReorderableListView.builder(
           buildDefaultDragHandles: false,
           itemCount: state.stocks.length,
           onReorder: (oldIndex, newIndex) {
-            if (newIndex > oldIndex) {
-              newIndex -= 1;
-            }
+            if (newIndex > oldIndex) newIndex -= 1;
 
             context.read<WatchlistBloc>().add(
               ReorderWatchlist(oldIndex, newIndex),
@@ -115,45 +106,44 @@ class EditWatchlistScreen extends StatelessWidget {
             return Container(
               key: ValueKey("${stock.name}-$index"),
               padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.03, // responsive horizontal padding
-                vertical: screenHeight * 0.02,
+                horizontal: ResponsiveUtils.screenWidth * 0.03,
+                vertical: ResponsiveUtils.screenHeight * 0.02,
               ),
               decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(color: Color(0xFFEAEAEA))),
+                border: Border(
+                  bottom: BorderSide(color: Color(0xFFEAEAEA)),
+                ),
               ),
               child: Row(
                 children: [
-                  /// DRAG ICON
                   ReorderableDragStartListener(
                     index: index,
                     child: Icon(
                       Icons.drag_handle,
-                      size: screenWidth * 0.05,
+                      size: ResponsiveUtils.screenWidth * 0.05,
                       color: Colors.black54,
                     ),
                   ),
 
-                  SizedBox(width: screenWidth * 0.03),
+                  SizedBox(width: ResponsiveUtils.screenWidth * 0.03),
 
-                  /// STOCK NAME
                   Expanded(
                     child: Text(
                       stock.name,
                       style: TextStyle(
-                        fontSize: 15 * textScale,
+                        fontSize: 15 * ResponsiveUtils.textScale,
                         color: Colors.black87,
                       ),
                     ),
                   ),
 
-                  /// DELETE ICON
                   GestureDetector(
                     onTap: () {
                       context.read<WatchlistBloc>().add(DeleteStock(index));
                     },
                     child: Icon(
                       Icons.delete,
-                      size: screenWidth * 0.055,
+                      size: ResponsiveUtils.screenWidth * 0.055,
                       color: Colors.black87,
                     ),
                   ),
@@ -166,53 +156,52 @@ class EditWatchlistScreen extends StatelessWidget {
     );
   }
 
-  ///  BOTTOM BUTTONS
-  Widget _bottomButtons(
-    double screenWidth,
-    double screenHeight,
-    double textScale,
-  ) {
+  /// BOTTOM BUTTONS
+  Widget _bottomButtons() {
     return Container(
-      padding: EdgeInsets.all(screenWidth * 0.03), // responsive padding
+      padding: EdgeInsets.all(ResponsiveUtils.screenWidth * 0.03),
       child: Column(
         children: [
-          /// OUTLINED BUTTON
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.018),
-            // responsive
+            padding: EdgeInsets.symmetric(
+              vertical: ResponsiveUtils.screenHeight * 0.018,
+            ),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade400),
               borderRadius: BorderRadius.circular(
-                screenWidth * 0.03,
-              ), // responsive radius
+                ResponsiveUtils.screenWidth * 0.03,
+              ),
             ),
             child: Center(
               child: Text(
                 "Edit other watchlists",
-                style: TextStyle(fontSize: 14 * textScale), // responsive text
+                style: TextStyle(
+                  fontSize: 14 * ResponsiveUtils.textScale,
+                ),
               ),
             ),
           ),
 
-          SizedBox(height: screenHeight * 0.015), // responsive spacing
-          /// PRIMARY BUTTON
+          SizedBox(height: ResponsiveUtils.screenHeight * 0.015),
+
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.018),
-            // responsive
+            padding: EdgeInsets.symmetric(
+              vertical: ResponsiveUtils.screenHeight * 0.018,
+            ),
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(
-                screenWidth * 0.03,
-              ), // responsive radius
+                ResponsiveUtils.screenWidth * 0.03,
+              ),
             ),
             child: Center(
               child: Text(
                 "Save Watchlist",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 15 * textScale, // responsive text
+                  fontSize: 15 * ResponsiveUtils.textScale,
                 ),
               ),
             ),

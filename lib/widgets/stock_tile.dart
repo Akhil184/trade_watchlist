@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/responsive_utils.dart';
 import '../../data/models/stock_model.dart';
 
 class StockTile extends StatelessWidget {
@@ -8,18 +9,15 @@ class StockTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final textScale = MediaQuery.of(context).textScaleFactor;
     final isPositive = stock.change >= 0;
 
     return Container(
       key: key,
       padding: EdgeInsets.only(
-        left: screenWidth * 0.015,   // 🔽 reduced left space
-        right: screenWidth * 0.03,   // keep right same (or adjust if needed)
-        top: screenHeight * 0.018,
-        bottom: screenHeight * 0.018,
+        left: ResponsiveUtils.screenWidth * 0.015,
+        right: ResponsiveUtils.screenWidth * 0.03,
+        top: ResponsiveUtils.screenHeight * 0.018,
+        bottom: ResponsiveUtils.screenHeight * 0.018,
       ),
       decoration: const BoxDecoration(
         border: Border(
@@ -28,8 +26,7 @@ class StockTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-
-          SizedBox(width: screenWidth * 0.03), // responsive spacing
+          SizedBox(width: ResponsiveUtils.screenWidth * 0.03),
 
           Expanded(
             child: Column(
@@ -39,15 +36,15 @@ class StockTile extends StatelessWidget {
                   stock.name,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 15 * textScale, // responsive text
+                    fontSize: 15 * ResponsiveUtils.textScale,
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.005), // responsive spacing
+                SizedBox(height: ResponsiveUtils.screenHeight * 0.005),
                 Text(
                   "${stock.exchange} | EQ",
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: 12 * textScale, // responsive text
+                    fontSize: 12 * ResponsiveUtils.textScale,
                   ),
                 ),
               ],
@@ -62,15 +59,15 @@ class StockTile extends StatelessWidget {
                 style: TextStyle(
                   color: isPositive ? Colors.green : Colors.red,
                   fontWeight: FontWeight.w600,
-                  fontSize: 15 * textScale, // responsive text
+                  fontSize: 15 * ResponsiveUtils.textScale,
                 ),
               ),
-              SizedBox(height: screenHeight * 0.005), // responsive spacing
+              SizedBox(height: ResponsiveUtils.screenHeight * 0.005),
               Text(
                 "${stock.change} (${stock.percentage}%)",
                 style: TextStyle(
                   color: isPositive ? Colors.green : Colors.red,
-                  fontSize: 12 * textScale, // responsive text
+                  fontSize: 12 * ResponsiveUtils.textScale,
                 ),
               ),
             ],
