@@ -32,28 +32,32 @@ Optional enhancement:
 
 lib/
 │
+├── core/
+│   └── utils/
+│       └── responsive_utils.dart    # Centralized responsive helper
+│
 ├── data/
 │   └── models/
-│       └── stock_model.dart         # Defines the Stock model
+│       └── stock_model.dart
 │
 ├── presentation/
 │   ├── bloc/
 │   │   └── watchlist/
-│   │       ├── watchlist_bloc.dart   # BLoC class for watchlist
-│   │       ├── watchlist_event.dart  # Watchlist events (load, reorder, delete)
-│   │       └── watchlist_state.dart  # State representation of the watchlist
+│   │       ├── watchlist_bloc.dart
+│   │       ├── watchlist_event.dart
+│   │       └── watchlist_state.dart
 │   │
 │   ├── screens/
-│   │   ├── watchlist_screen.dart      # Main watchlist overview screen
-│   │   └── edit_watchlist_screen.dart # Reorderable watchlist screen
+│   │   ├── watchlist_screen.dart
+│   │   └── edit_watchlist_screen.dart
 │   │
-│   └──widgets/
-│       ├── stock_tile.dart           # Reusable stock row widget
-│       ├── watchlist_tabs.dart       # Tabs for categories
-│       ├── search_bar.dart           # Search bar widget
-│       └── sort_button.dart          # Sort button widget
+│   └── widgets/
+│       ├── stock_tile.dart
+│       ├── watchlist_tabs.dart
+│       ├── search_bar.dart
+│       └── sort_button.dart
 │
-└── main.dart                          # Entry point and BlocProvider setup
+└── main.dart
 
 ## How to Run
 
@@ -66,4 +70,4 @@ lib/
 - Reordering is handled entirely via BLoC; 
 - Drag icon (handles) are shown only in EditWatchlistScreen, as in the reference video.
 - The layout uses Expanded, Column, and Row to ensure responsiveness across devices.
-- MediaQuery is used throughout the application to dynamically adapt padding, spacing, and font sizes based on screen width, height, and text scale factor, ensuring a consistent UI across different screen sizes.
+- A centralized responsive utility (`ResponsiveUtils`) is used to manage screen width, height, and text scaling across the application, improving consistency, reducing redundancy, and avoiding repeated MediaQuery usage.
