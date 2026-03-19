@@ -66,3 +66,4 @@ lib/
 - Reordering is handled entirely via BLoC; 
 - Drag icon (handles) are shown only in EditWatchlistScreen, as in the reference video.
 - The layout uses Expanded, Column, and Row to ensure responsiveness across devices.
+- MediaQuery is used throughout the application to dynamically adapt padding, spacing, and font sizes based on screen width, height, and text scale factor, ensuring a consistent UI across different screen sizes.
