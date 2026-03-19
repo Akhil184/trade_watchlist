@@ -5,23 +5,31 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(screenWidth * 0.03), // responsive padding
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.03,
+          vertical: screenHeight * 0.008,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.025),
         decoration: BoxDecoration(
           color: const Color(0xFFF2F2F2),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(screenWidth * 0.025),
         ),
-        child: const TextField(
+        child: TextField(
           decoration: InputDecoration(
-            icon: Icon(Icons.search, size: 20),
+            icon: Icon(Icons.search, size: screenWidth * 0.05), // responsive icon
             hintText: "Search for instruments",
+            hintStyle: TextStyle(fontSize: 14 * textScale), // responsive text
             border: InputBorder.none,
           ),
         ),
-      )
+      ),
     );
   }
 }

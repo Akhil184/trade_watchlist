@@ -5,23 +5,27 @@ class WatchlistTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final textScale = MediaQuery.of(context).textScaleFactor;
+
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Row(
-          children: [
-            _tab("Watchlist 1", true),
-            SizedBox(width: 24),
-            _tab("Watchlist 5", false),
-            SizedBox(width: 24),
-            _tab("Watchlist 6", false),
-          ],
-        )
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+      child: Row(
+        children: [
+          _tab("Watchlist 1", true, screenWidth, screenHeight, textScale),
+          SizedBox(width: screenWidth * 0.06), // responsive spacing
+          _tab("Watchlist 5", false, screenWidth, screenHeight, textScale),
+          SizedBox(width: screenWidth * 0.06),
+          _tab("Watchlist 6", false, screenWidth, screenHeight, textScale),
+        ],
+      ),
     );
   }
 
-  Widget _tab(String text, bool active) {
+  Widget _tab(String text, bool active, double screenWidth, double screenHeight, double textScale) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
       child: Column(
         children: [
           Text(
@@ -29,13 +33,14 @@ class WatchlistTabs extends StatelessWidget {
             style: TextStyle(
               fontWeight: active ? FontWeight.w600 : FontWeight.normal,
               color: active ? Colors.black : Colors.grey,
+              fontSize: 14 * textScale, // responsive text
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: screenHeight * 0.008), // responsive spacing
           if (active)
             Container(
-              height: 2,
-              width: 60,
+              height: screenHeight * 0.003,   // responsive height
+              width: screenWidth * 0.15,      // responsive width
               color: Colors.black,
             ),
         ],
