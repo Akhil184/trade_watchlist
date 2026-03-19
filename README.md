@@ -1,45 +1,45 @@
 # Watchlist Reordering (Flutter)
 
-This project implements a watchlist feature where users can view and reorder stocks, similar to the reference video provided in the assignment. The main focus is on drag-and-drop reordering using the BLoC architecture, with a clean and responsive UI.
+This is a simple watchlist feature where users can view and reorder stocks. I tried to match the behavior from the reference video, mainly the drag and drop part, using BLoC.
 
 ## Features
 
-- Drag-and-drop reordering of stocks in a watchlist
-- Two screens:
-    - WatchlistScreen – main watchlist overview (read-only)
-    - EditWatchlistScreen – reorderable watchlist with drag handles
-- BLoC pattern used for state management
-- UI designed to closely match the reference video
-- Responsive layout suitable for different screen sizes
-- Sample stock data included for demonstration
+- View list of stocks
+- Reorder items using drag and drop
+- Separate screen to edit order
+- BLoC for state management
+- Basic responsive UI
+- Sample data added
+
+## Screens
+
+- WatchlistScreen – shows the list normally
+- EditWatchlistScreen – used for reordering with drag handles
 
 ## Approach
 
-The main requirement was to implement reordering using BLoC while maintaining clean state management:
+The list is stored inside the BLoC.
 
-1. The stock list is stored in the BLoC state.
-2. When a user drags an item, a `ReorderWatchlist` event is triggered.
-3. The BLoC updates the list by removing and inserting the item at the new index.
-4. The updated state is emitted, automatically rebuilding the UI.
-5. `ReorderableListView` is used to handle drag interactions.
-6. Changes made in EditWatchlistScreen are reflected immediately in WatchlistScreen through the BLoC state.
+When an item is dragged, a reorder event is triggered. The BLoC updates the list by moving the item and emits a new state. UI rebuilds automatically after that.
 
-Optional enhancement:
+Used ReorderableListView for drag and drop.
 
-- Users can also delete stocks from the watchlist using the delete icon in the edit screen.
+Reordering is only enabled in the edit screen so the main screen stays simple.
+
+Also added an option to delete items in the edit screen.
 
 ## Project Structure
 
 lib/
-│
+
 ├── core/
 │   └── utils/
-│       └── responsive_utils.dart    # Centralized responsive helper
-│
+│       └── responsive_utils.dart   // handles screen sizes
+
 ├── data/
 │   └── models/
 │       └── stock_model.dart
-│
+
 ├── presentation/
 │   ├── bloc/
 │   │   └── watchlist/
@@ -50,24 +50,24 @@ lib/
 │   ├── screens/
 │   │   ├── watchlist_screen.dart
 │   │   └── edit_watchlist_screen.dart
-│   │
-│   └── widgets/
-│       ├── stock_tile.dart
-│       ├── watchlist_tabs.dart
-│       ├── search_bar.dart
-│       └── sort_button.dart
-│
+
+├── widgets/
+│   ├── stock_tile.dart
+│   ├── watchlist_tabs.dart
+│   ├── search_bar.dart
+│   └── sort_button.dart
+
 └── main.dart
 
-## How to Run
+## How to run
 
-1. Clone the repository.
-2. Run `flutter pub get` to install dependencies.
-3. Launch the app using `flutter run`.
+1. Clone the repo
+2. Run flutter pub get
+3. Run flutter run
 
 ## Notes
 
-- Reordering is handled entirely via BLoC; 
-- Drag icon (handles) are shown only in EditWatchlistScreen, as in the reference video.
-- The layout uses Expanded, Column, and Row to ensure responsiveness across devices.
-- A centralized responsive utility (`ResponsiveUtils`) is used to manage screen width, height, and text scaling across the application, improving consistency, reducing redundancy, and avoiding repeated MediaQuery usage.
+- Reordering handled in BLoC
+- Drag handles only in edit screen
+- Used Row, Column, Expanded for layout
+- Added small helper to avoid repeating MediaQuery  
