@@ -11,7 +11,7 @@ class SortButton extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.03,
+        horizontal: screenWidth * 0.05,
         vertical: screenHeight * 0.008,
       ),
       child: Align(
@@ -19,7 +19,7 @@ class SortButton extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.035,
-            vertical: screenHeight * 0.015,
+            vertical: screenHeight * 0.013,
           ),
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
