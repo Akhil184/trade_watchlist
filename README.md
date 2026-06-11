@@ -1,8 +1,11 @@
 # Watchlist Reordering (Flutter)
 
+<img width="630" height="1400" alt="WhatsApp Image 2026-06-11 at 12 10 14 PM" src="https://github.com/user-attachments/assets/73786d7a-d82f-44c4-86e5-93621ec7f561" />
+
 <img width="630" height="1400" alt="WhatsApp Image 2026-06-11 at 12 10 36 PM" src="https://github.com/user-attachments/assets/9439c683-4b19-49ca-9a6b-ff80a9bcf1f0" />
 
-<img width="630" height="1400" alt="WhatsApp Image 2026-06-11 at 12 10 14 PM" src="https://github.com/user-attachments/assets/73786d7a-d82f-44c4-86e5-93621ec7f561" />
+
+
 
 
 This is a simple watchlist feature where users can view and reorder stocks. I tried to match the behavior from the reference video, mainly the drag and drop part, using BLoC.
